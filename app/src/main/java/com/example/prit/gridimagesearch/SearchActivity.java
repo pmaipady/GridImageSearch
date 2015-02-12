@@ -12,6 +12,16 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.AdapterView;
+import android.widget.EditText;
+import android.widget.GridView;
+import android.widget.SearchView;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
+import android.widget.Toast;
+
+
+import java.io.Serializable;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -45,6 +55,20 @@ public class SearchActivity extends ActionBarActivity {
     private void setUpViews(){
         etSearch = (EditText)findViewById(R.id.etSearch);
         gvImage = (GridView)findViewById(R.id.gvImage);
+        gvImage.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //launch the image display activity
+                //Creating on intent
+                Intent i = new Intent(SearchActivity.this,  ImageFullDisplay.class);
+                //Get the image result to display
+                ImageResult result = imageResults.get(position);
+                //Pass image result into the intent
+                 i.putExtra("result",  result);  //need to either be serializable or parcelable
+                //launch the new activity
+                startActivity(i);
+            }
+        });
     }
 
 

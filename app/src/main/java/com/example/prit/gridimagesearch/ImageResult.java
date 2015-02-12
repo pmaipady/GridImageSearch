@@ -5,11 +5,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-
+import java.io.Serializable;
 /**
  * Created by Prit on 2/10/2015.
  */
-public class ImageResult {
+public class ImageResult implements Serializable {
     public String fullurl;
     public String thumburl;
     public String title;

@@ -22,6 +22,10 @@
             android:name=".ImageFullDisplay"
             android:label="@string/title_activity_image_full_display" >
         </activity>
+        <activity
+            android:name=".ImageOptionsDisplay"
+            android:label="@string/title_activity_image_options_display" >
+        </activity>
     </application>
 
 </manifest>

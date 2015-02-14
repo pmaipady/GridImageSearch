@@ -1,0 +1,130 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.example.prit.gridimagesearch.ImageOptionsDisplay">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Color"
+        android:id="@+id/textView"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Red"
+        android:id="@+id/cbRed"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:checked="false" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Blue"
+        android:id="@+id/cbBlue"
+        android:layout_below="@+id/cbRed"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:checked="false" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Yellow"
+        android:id="@+id/cbYellow"
+        android:layout_below="@+id/cbBlue"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:checked="false" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:id="@+id/btnSubmit"
+        android:layout_below="@+id/cbYellow"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:onClick="onSubmit" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Size"
+        android:id="@+id/textView2"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/cbSmall"
+        android:layout_alignStart="@+id/cbSmall"
+        android:layout_above="@+id/cbSmall" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Small"
+        android:id="@+id/cbSmall"
+        android:layout_above="@+id/cbMedium"
+        android:layout_alignLeft="@+id/cbMedium"
+        android:layout_alignStart="@+id/cbMedium" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Medium"
+        android:id="@+id/cbMedium"
+        android:layout_above="@+id/cbYellow"
+        android:layout_toRightOf="@+id/btnSubmit"
+        android:layout_toEndOf="@+id/btnSubmit" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Large"
+        android:id="@+id/cbLarge"
+        android:layout_below="@+id/cbMedium"
+        android:layout_toRightOf="@+id/btnSubmit"
+        android:layout_toEndOf="@+id/btnSubmit" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Faces"
+        android:id="@+id/cbFaces"
+        android:layout_above="@+id/cbMedium"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Photo"
+        android:id="@+id/cbPhoto"
+        android:layout_alignTop="@+id/cbMedium"
+        android:layout_alignLeft="@+id/cbFaces"
+        android:layout_alignStart="@+id/cbFaces" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Clip art"
+        android:id="@+id/cbClipart"
+        android:layout_below="@+id/cbPhoto"
+        android:layout_alignRight="@+id/cbPhoto"
+        android:layout_alignEnd="@+id/cbPhoto" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Types"
+        android:id="@+id/textView3"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/cbClipart"
+        android:layout_alignStart="@+id/cbClipart" />
+</RelativeLayout>

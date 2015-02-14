@@ -10,11 +10,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
@@ -40,6 +42,8 @@ public class SearchActivity extends ActionBarActivity {
     private GridView gvImage;
     private ArrayList<ImageResult> imageResults;
     private ImageResultsAdapter aImageResults;
+    String Filter,searchUrl;
+    private final int REQUEST_CODE = 20;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +52,7 @@ public class SearchActivity extends ActionBarActivity {
         imageResults = new ArrayList<ImageResult>();
         aImageResults = new ImageResultsAdapter(this,imageResults);
         gvImage.setAdapter(aImageResults);
+        Filter = null;
 
     }
 
@@ -74,9 +79,14 @@ public class SearchActivity extends ActionBarActivity {
 
 
     public void onImageSearch(View v){
-        String query = etSearch.getText().toString();
+       Filter = "";
+        showImage();
+    }
+    public void showImage(){
+    String query = etSearch.getText().toString();
         AsyncHttpClient client = new AsyncHttpClient();
-        String searchUrl = "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=" + query + "&rsz=8";
+        String searchUrl = "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=" + query + Filter + "&rsz=8";
+        //searchUrl = searchUrl + query + "&rsz=8&start=";
         client.get(searchUrl, new JsonHttpResponseHandler() {
         @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -119,6 +129,29 @@ public class SearchActivity extends ActionBarActivity {
             return true;
         }
 
+        if (id == R.id.filter) {
+            launchFilterView();
+            return true;
+        }
         return super.onOptionsItemSelected(item);
+    }
+    public void launchFilterView() {
+        Intent i = new Intent(this, ImageOptionsDisplay.class);
+      //  if (filter == null)
+       //     filter = new Filter("small", "", "car", null);
+         startActivityForResult(i, REQUEST_CODE);
+
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // REQUEST_CODE is defined above
+        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
+            // Extract name value from result extras
+
+             Filter = data.getExtras().getString("filter");
+            // Set the new text to List View
+             showImage();
+
+        }
     }
 }

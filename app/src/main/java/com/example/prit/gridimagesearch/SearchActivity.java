@@ -53,7 +53,14 @@ public class SearchActivity extends ActionBarActivity {
         aImageResults = new ImageResultsAdapter(this,imageResults);
         gvImage.setAdapter(aImageResults);
         Filter = null;
-
+        gvImage.setOnScrollListener(new EndlessScrollListener() {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount) {
+                if(page<9){
+                    showImage(totalItemsCount);
+                }
+            }
+        });
     }
 
 
@@ -80,12 +87,14 @@ public class SearchActivity extends ActionBarActivity {
 
     public void onImageSearch(View v){
        Filter = "";
-        showImage();
+        imageResults.clear();
+        aImageResults.clear();
+        showImage(0);
     }
-    public void showImage(){
+    public void showImage(final int startIndex){
     String query = etSearch.getText().toString();
         AsyncHttpClient client = new AsyncHttpClient();
-        String searchUrl = "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=" + query + Filter + "&rsz=8";
+        String searchUrl = "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=" + query + Filter + "&rsz=8&start=" + startIndex;
         //searchUrl = searchUrl + query + "&rsz=8&start=";
         client.get(searchUrl, new JsonHttpResponseHandler() {
         @Override
@@ -96,7 +105,7 @@ public class SearchActivity extends ActionBarActivity {
 
             try{
                 imageResultsJson = response.getJSONObject("responseData").getJSONArray("results");
-               imageResults.clear();
+              // imageResults.clear();
                aImageResults.addAll(ImageResult.fromJSONArray(imageResultsJson));
             }catch (JSONException e){
                 e.printStackTrace();
@@ -150,7 +159,9 @@ public class SearchActivity extends ActionBarActivity {
 
              Filter = data.getExtras().getString("filter");
             // Set the new text to List View
-             showImage();
+            imageResults.clear();
+            aImageResults.clear();
+             showImage(0);
 
         }
     }
